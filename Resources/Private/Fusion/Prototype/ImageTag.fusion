@@ -3,12 +3,14 @@ prototype(Visol.Neos.ResponsiveImages:ImageTag) < prototype(Neos.Fusion:Tag) {
     ratio = NULL
     maximumWidth = NULL
     maximumHeight = NULL
+    initialSrcMaxWidth = NULL
     allowCropping = FALSE
     sizes = ${Configuration.setting('Visol.Neos.ResponsiveImages.SizesPresets.Default')}
     @context.asset = ${this.asset}
     @context.ratio = ${this.ratio}
     @context.maximumWidth = ${this.maximumWidth}
     @context.maximumHeight = ${this.maximumHeight}
+    @context.initialSrcWidth = ${this.initialSrcMaxWidth ? initialSrcMaxWidth : maximumWidth}
     @context.allowCropping = ${this.allowCropping}
     @context.sizes = ${this.sizes}
 
@@ -24,5 +26,9 @@ prototype(Visol.Neos.ResponsiveImages:ImageTag) < prototype(Neos.Fusion:Tag) {
             sizes = ${sizes}
         }
         data-sizes = 'auto'
+        src = Neos.Neos:ImageUri {
+            asset = ${asset}
+            width = ${maximumWidth}
+        }
     }
 }
